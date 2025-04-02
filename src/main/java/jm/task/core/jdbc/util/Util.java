@@ -16,10 +16,8 @@ public class Util {
         try {
             Class.forName(MYSQL_DRIVER);
             connection = DriverManager.getConnection(MYSQL_URL,MYSQL_USERNAME,MYSQL_PASSWORD);
-            System.out.println("Connection OK");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            System.out.println("Connection ERROR");
         }
         return connection;
     }
