@@ -1,4 +1,5 @@
 import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
@@ -9,9 +10,10 @@ import org.junit.Test;
 import java.util.List;
 
 import static jm.task.core.jdbc.util.Util.getConnection;
+import static jm.task.core.jdbc.util.Util.getSessionFactory;
 
 public class UserServiceTest {
-    private final UserDao userDao = new UserDaoJDBCImpl(getConnection());
+    private final UserDao userDao = new UserDaoHibernateImpl(getSessionFactory());
     private final UserService userService = new UserServiceImpl(userDao);
 
     private final String testName = "Ivan";

@@ -1,21 +1,24 @@
 package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.SessionFactory;
 
 import java.sql.Connection;
 import java.util.List;
 
 import static jm.task.core.jdbc.util.Util.getConnection;
+import static jm.task.core.jdbc.util.Util.getSessionFactory;
 
 public class Main {
     public static void main(String[] args) {
-        Connection connection = getConnection();
-        UserDao userDao = new UserDaoJDBCImpl(connection);
+        SessionFactory sessionFactory = getSessionFactory();
+        UserDao userDao = new UserDaoHibernateImpl(sessionFactory);
         UserService userService = new UserServiceImpl(userDao);
         userService.createUsersTable();
         userService.saveUser("Владислав", "Илясов", (byte) 25);
