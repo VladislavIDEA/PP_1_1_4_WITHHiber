@@ -8,11 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl extends Util implements UserDao {
-    public UserDaoJDBCImpl() {
+    private final Connection connection;
 
+    public UserDaoJDBCImpl(Connection connection) {
+        this.connection = connection;
     }
 
-    private final Connection connection = getConnection();
+    public UserDaoJDBCImpl() {
+        this.connection = getConnection();
+    }
 
     public void createUsersTable() {
         String sql = String.join(" ",
